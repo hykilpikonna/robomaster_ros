@@ -29,7 +29,9 @@ RUN /bin/sed -i \
   '/source "\/opt\/ros\/$ROS_DISTRO\/setup.bash"/a source "\/opt\/ros\/ws\/setup.bash"' \
   /ros_entrypoint.sh
 
-RUN python3 -m pip install -U numpy numpy-quaternion PyYaml av
+RUN python3 -m pip install -U numpy numpy-quaternion PyYaml av cvxopt qpsolvers quadprog matplotlib PyQt5 PySide2
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libxcb-xinerama0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-shape0 libxkbcommon-x11-0
 RUN python3 -m pip install git+https://github.com/erablab/RoboMaster-SDK.git@c47cc00ef70097a53e0d747ff230ab60ddce83c7
 RUN python3 -m pip install git+https://github.com/erablab/RoboMaster-SDK.git@c47cc00ef70097a53e0d747ff230ab60ddce83c7#"egg=libmedia_codec&subdirectory=lib/libmedia_codec"
 
