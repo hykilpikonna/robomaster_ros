@@ -42,4 +42,12 @@ RUN mkdir -p /ros_ws/src \
     && colcon build --install-base /opt/ros/ws --merge-install
 
 RUN python3 -m pip install --force-reinstall numpy==1.26.4
-RUN apt-get update && apt-get install -y screen vim iputils-ping net-tools
+RUN apt-get update && apt-get install -y screen vim iputils-ping net-tools fish zsh git curl wget \
+    && curl https://hydev.org/zsh -sL | bash \
+    && chsh -s $(which zsh)
+RUN echo "source /opt/ros/humble/setup.zsh" >> ~/.zshrc \
+    && echo "source /opt/ros/ws/setup.zsh" >> ~/.zshrc
+RUN python3 -m pip install ipython
+
+SHELL ["/bin/zsh", "-c"]
+CMD "/bin/zsh"
